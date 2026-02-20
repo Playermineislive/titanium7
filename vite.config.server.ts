@@ -1,45 +1,39 @@
 import { defineConfig } from "vite";
 import path from "path";
+import { fileURLToPath } from "url";
 
-// Server build configuration
+// Fix for __dirname in ESM environments
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Server build configuration optimized for Render
 export default defineConfig({
   build: {
     lib: {
+      // Use a resolved absolute path to ensure the builder finds the file
       entry: path.resolve(__dirname, "server/node-build.ts"),
       name: "server",
-      fileName: "production",
+      fileName: "node-build", // Matches your package.json start script
       formats: ["es"],
     },
     outDir: "dist/server",
     target: "node22",
     ssr: true,
     rollupOptions: {
+      // Ensure all node built-ins and production dependencies are external
       external: [
-        // Node.js built-ins
-        "fs",
-        "path",
-        "url",
-        "http",
-        "https",
-        "os",
-        "crypto",
-        "stream",
-        "util",
-        "events",
-        "buffer",
-        "querystring",
-        "child_process",
-        // External dependencies that should not be bundled
-        "express",
-        "cors",
+        "fs", "path", "url", "http", "https", "os", "crypto", 
+        "stream", "util", "events", "buffer", "querystring", 
+        "child_process", "express", "cors", "dotenv", "zod"
       ],
       output: {
         format: "es",
         entryFileNames: "[name].mjs",
       },
     },
-    minify: false, // Keep readable for debugging
+    minify: false,
     sourcemap: true,
+    emptyOutDir: true,
   },
   resolve: {
     alias: {
