@@ -15,19 +15,24 @@ interface Model {
   category: string;
 }
 
+interface HeaderProps {
+  activeModel: string;
+  onModelChange: (model: string) => void;
+}
+
 const MODELS: Model[] = [
   // Language Models
   { id: "deepseek-r1", name: "DeepSeek R1", category: "Language Models" },
   { id: "qwen-3.5", name: "Qwen 3.5", category: "Language Models" },
-  
+
   // Generative Art
   { id: "dreamshaper-xl", name: "DreamShaper XL", category: "Generative Art" },
   { id: "animagine-anime", name: "Animagine Anime", category: "Generative Art" },
-  
+
   // Cinematic Video
   { id: "damo-t2v", name: "Damo T2V", category: "Cinematic Video" },
   { id: "stable-video", name: "Stable Video Diffusion", category: "Cinematic Video" },
-  
+
   // Creative Editing
   { id: "instruct-pix2pix", name: "Instruct Pix2Pix", category: "Creative Editing" },
 ];
@@ -39,18 +44,14 @@ const CATEGORIES = [
   "Creative Editing",
 ];
 
-export default function Header() {
+export default function Header({ activeModel, onModelChange }: HeaderProps) {
   const [backendUrl, setBackendUrl] = useState("");
-  const [selectedModel, setSelectedModel] = useState("deepseek-r1");
   const [showUrlInput, setShowUrlInput] = useState(false);
 
   // Load from localStorage on mount
   useEffect(() => {
     const savedUrl = localStorage.getItem("titanium-backend-url");
-    const savedModel = localStorage.getItem("titanium-selected-model");
-    
     if (savedUrl) setBackendUrl(savedUrl);
-    if (savedModel) setSelectedModel(savedModel);
   }, []);
 
   // Save to localStorage when values change
@@ -60,8 +61,7 @@ export default function Header() {
   };
 
   const handleModelChange = (value: string) => {
-    setSelectedModel(value);
-    localStorage.setItem("titanium-selected-model", value);
+    onModelChange(value);
   };
 
   return (
@@ -82,7 +82,7 @@ export default function Header() {
           <div className="flex items-center gap-2 sm:gap-3">
             {/* Model Selector */}
             <div className="hidden sm:block">
-              <Select value={selectedModel} onValueChange={handleModelChange}>
+              <Select value={activeModel} onValueChange={handleModelChange}>
                 <SelectTrigger className="glass-input w-48 md:w-56 px-4 py-2 text-sm border-0 bg-white/40 cursor-pointer">
                   <SelectValue placeholder="Select model" />
                 </SelectTrigger>

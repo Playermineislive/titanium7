@@ -132,20 +132,20 @@
   /* Glassmorphic Panel - Polished & Clean */
   .glass-panel {
     @apply rounded-3xl bg-white/85 backdrop-blur-2xl;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
     border: 1px solid rgba(255, 255, 255, 0.6);
   }
 
   /* Glass Button - Refined Interactions */
   .glass-button {
     @apply rounded-full bg-blue-500 text-white font-medium transition-all duration-150 cursor-pointer;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
     border: 1px solid rgba(255, 255, 255, 0.3);
   }
 
   .glass-button:hover:not(:disabled) {
     @apply scale-105;
-    box-shadow: 0 8px 32px rgba(59, 130, 246, 0.15);
+    box-shadow: 0 8px 28px rgba(59, 130, 246, 0.12);
   }
 
   .glass-button:active:not(:disabled) {
@@ -161,7 +161,7 @@
     @apply rounded-full bg-white/50 backdrop-blur-xl border border-blue-200/30;
     @apply px-4 py-2 text-foreground placeholder-slate-400;
     @apply focus:outline-none focus:ring-2 focus:ring-blue-400 focus:bg-white;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.02);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
     transition: all 0.25s ease;
   }
 

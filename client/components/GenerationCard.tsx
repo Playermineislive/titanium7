@@ -109,7 +109,7 @@ export default function GenerationCard({
       </div>
 
       {/* Result Area */}
-      <div className="min-h-32 rounded-2xl bg-gradient-to-br from-slate-50 to-slate-100/40 p-6 border border-blue-100/20">
+      <div className="min-h-32 rounded-2xl bg-gradient-to-br from-slate-50 to-slate-100/40 p-6 border border-blue-100/20" style={{ boxShadow: "0 4px 20px rgba(0, 0, 0, 0.04)" }}>
         {isLoading ? (
           <div className="h-32 flex items-center justify-center">
             <div className="flex flex-col items-center gap-3">
