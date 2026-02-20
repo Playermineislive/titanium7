@@ -93,15 +93,15 @@ export default function Index() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-slate-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-slate-50 flex flex-col">
       <Header />
 
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="flex-1 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-8">
         {generations.length === 0 ? (
-          // Empty State
-          <div className="min-h-[60vh] flex flex-col items-center justify-center text-center">
+          // Empty State - Perfectly Centered
+          <div className="h-full flex flex-col items-center justify-center text-center py-12">
             <div className="mb-6 float-animation">
-              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center shadow-xl">
+              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center shadow-md">
                 <svg
                   className="w-10 h-10 text-white"
                   fill="none"
@@ -117,39 +117,38 @@ export default function Index() {
                 </svg>
               </div>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-2">
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-3 tracking-tight">
               Welcome to Titanium Studio
             </h2>
-            <p className="text-slate-600 text-lg max-w-md mb-8">
-              Your premium AI generation platform. Create stunning content with
-              our cutting-edge models.
+            <p className="text-slate-600 text-base md:text-lg max-w-md mb-8 leading-relaxed">
+              Your premium AI generation platform. Create stunning content with our cutting-edge models.
             </p>
-            <div className="glass-panel p-6 max-w-md text-left">
-              <h3 className="font-semibold text-slate-800 mb-4">Quick Start:</h3>
-              <ol className="space-y-2 text-sm text-slate-700">
-                <li className="flex gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-500 text-white flex items-center justify-center text-xs font-bold">
+            <div className="glass-panel p-6 max-w-sm text-left">
+              <h3 className="font-semibold text-slate-800 mb-4 text-base">Quick Start:</h3>
+              <ol className="space-y-3 text-sm text-slate-700">
+                <li className="flex gap-3 items-start">
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-500 text-white flex items-center justify-center text-xs font-bold leading-none">
                     1
                   </span>
-                  <span>Select an AI model from the header dropdown</span>
+                  <span className="leading-snug">Select an AI model from the header dropdown</span>
                 </li>
-                <li className="flex gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-500 text-white flex items-center justify-center text-xs font-bold">
+                <li className="flex gap-3 items-start">
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-500 text-white flex items-center justify-center text-xs font-bold leading-none">
                     2
                   </span>
-                  <span>Configure your Backend Ngrok URL in settings</span>
+                  <span className="leading-snug">Configure your Backend Ngrok URL in settings</span>
                 </li>
-                <li className="flex gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-500 text-white flex items-center justify-center text-xs font-bold">
+                <li className="flex gap-3 items-start">
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-500 text-white flex items-center justify-center text-xs font-bold leading-none">
                     3
                   </span>
-                  <span>Describe what you want to create in the dock</span>
+                  <span className="leading-snug">Describe what you want to create in the dock</span>
                 </li>
-                <li className="flex gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-500 text-white flex items-center justify-center text-xs font-bold">
+                <li className="flex gap-3 items-start">
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-500 text-white flex items-center justify-center text-xs font-bold leading-none">
                     4
                   </span>
-                  <span>Watch your generation appear here</span>
+                  <span className="leading-snug">Watch your generation appear here</span>
                 </li>
               </ol>
             </div>
@@ -158,7 +157,7 @@ export default function Index() {
           // Generation Cards Grid
           <div
             ref={containerRef}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-32"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-32 auto-rows-max"
           >
             {generations.map((gen) => (
               <GenerationCard

@@ -70,33 +70,33 @@ export default function Header() {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center shadow-lg">
-              <span className="text-white font-bold text-xl">T</span>
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center shadow-md">
+              <span className="text-white font-bold text-xl leading-none">T</span>
             </div>
-            <h1 className="text-xl font-bold text-slate-800 hidden sm:block">
+            <h1 className="text-lg font-bold text-slate-800 hidden sm:block tracking-tight">
               Titanium Studio
             </h1>
           </div>
 
           {/* Settings Bar */}
-          <div className="flex items-center gap-3 md:gap-4">
+          <div className="flex items-center gap-2 sm:gap-3">
             {/* Model Selector */}
             <div className="hidden sm:block">
               <Select value={selectedModel} onValueChange={handleModelChange}>
-                <SelectTrigger className="glass-input w-48 md:w-56 px-4 py-2 text-sm border-0 bg-white/40 focus:ring-blue-400">
+                <SelectTrigger className="glass-input w-48 md:w-56 px-4 py-2 text-sm border-0 bg-white/40 cursor-pointer">
                   <SelectValue placeholder="Select model" />
                 </SelectTrigger>
                 <SelectContent className="bg-white/95 backdrop-blur-xl border border-blue-100/30">
                   {CATEGORIES.map((category) => (
                     <SelectGroup key={category}>
-                      <SelectLabel className="text-xs font-semibold text-slate-600 px-2 py-1.5">
+                      <SelectLabel className="text-xs font-semibold text-slate-600 px-2 py-1.5 tracking-tight">
                         {category}
                       </SelectLabel>
                       {MODELS.filter((m) => m.category === category).map((model) => (
                         <SelectItem
                           key={model.id}
                           value={model.id}
-                          className="cursor-pointer hover:bg-blue-50"
+                          className="cursor-pointer hover:bg-blue-50 transition-colors"
                         >
                           {model.name}
                         </SelectItem>
@@ -107,10 +107,11 @@ export default function Header() {
               </Select>
             </div>
 
-            {/* URL Input Toggle */}
+            {/* Settings Button */}
             <button
               onClick={() => setShowUrlInput(!showUrlInput)}
               className="glass-button px-4 py-2 text-sm md:text-base rounded-full whitespace-nowrap"
+              aria-label="Toggle settings"
             >
               {showUrlInput ? "✕" : "Settings"}
             </button>

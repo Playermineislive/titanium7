@@ -63,30 +63,32 @@ export default function GenerationCard({
   return (
     <div className="generation-card group">
       {/* Header */}
-      <div className="flex items-start justify-between mb-4">
-        <div className="flex-1">
-          <p className={`inline-block px-3 py-1 rounded-full text-xs font-semibold mb-3 ${modelInfo.color}`}>
+      <div className="flex items-start justify-between gap-4 mb-4">
+        <div className="flex-1 min-w-0">
+          <p className={`inline-block px-3 py-1 rounded-full text-xs font-semibold mb-3 ${modelInfo.color} tracking-tight`}>
             {modelInfo.label}
           </p>
-          <p className="text-slate-700 text-sm leading-relaxed">{prompt}</p>
+          <p className="text-slate-700 text-sm leading-normal break-words">{prompt}</p>
         </div>
-        
+
         {/* Action Buttons */}
-        <div className="flex gap-2 ml-4 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0">
+        <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex-shrink-0">
           {result && (
             <>
               <button
                 onClick={handleCopy}
-                className="glass-button p-2 rounded-full text-white hover:scale-110"
+                className="glass-button p-2 rounded-full text-white"
                 title={copied ? "Copied!" : "Copy"}
+                aria-label={copied ? "Copied" : "Copy result"}
               >
                 <Copy className="w-4 h-4" />
               </button>
               {resultType === "text" && (
                 <button
                   onClick={handleDownload}
-                  className="glass-button p-2 rounded-full text-white hover:scale-110"
+                  className="glass-button p-2 rounded-full text-white"
                   title="Download"
+                  aria-label="Download result"
                 >
                   <Download className="w-4 h-4" />
                 </button>
@@ -96,8 +98,9 @@ export default function GenerationCard({
           {onDelete && (
             <button
               onClick={() => onDelete(id)}
-              className="glass-button p-2 rounded-full text-white hover:scale-110 hover:bg-red-500"
+              className="glass-button p-2 rounded-full text-white"
               title="Delete"
+              aria-label="Delete generation"
             >
               <Trash2 className="w-4 h-4" />
             </button>
@@ -106,26 +109,24 @@ export default function GenerationCard({
       </div>
 
       {/* Result Area */}
-      <div className="min-h-32 rounded-2xl bg-gradient-to-br from-slate-50 to-slate-100/50 p-6 border border-blue-100/30">
+      <div className="min-h-32 rounded-2xl bg-gradient-to-br from-slate-50 to-slate-100/40 p-6 border border-blue-100/20">
         {isLoading ? (
           <div className="h-32 flex items-center justify-center">
             <div className="flex flex-col items-center gap-3">
               <div className="animate-spin">
                 <div className="w-8 h-8 border-4 border-blue-200 border-t-blue-500 rounded-full" />
               </div>
-              <p className="text-sm text-slate-500">Generating...</p>
+              <p className="text-sm text-slate-500 font-medium">Generating...</p>
             </div>
           </div>
         ) : result ? (
           <>
             {resultType === "text" && (
-              <div className="prose prose-sm max-w-none">
-                <p className="text-slate-700 whitespace-pre-wrap text-sm leading-relaxed">
-                  {result}
-                </p>
-              </div>
+              <p className="text-slate-700 whitespace-pre-wrap text-sm leading-relaxed">
+                {result}
+              </p>
             )}
-            
+
             {resultType === "image" && (
               <img
                 src={result}
@@ -133,7 +134,7 @@ export default function GenerationCard({
                 className="w-full h-auto rounded-xl object-cover max-h-96"
               />
             )}
-            
+
             {resultType === "video" && (
               <video
                 src={result}
@@ -143,7 +144,7 @@ export default function GenerationCard({
             )}
           </>
         ) : (
-          <div className="h-32 flex items-center justify-center text-slate-400 text-sm">
+          <div className="h-32 flex items-center justify-center text-slate-400 text-sm font-medium">
             Waiting for results...
           </div>
         )}
