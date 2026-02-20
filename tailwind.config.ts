@@ -13,6 +13,9 @@ export default {
       },
     },
     extend: {
+      borderRadius: {
+        "3xl": "1.5rem",
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

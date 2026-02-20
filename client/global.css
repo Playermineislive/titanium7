@@ -7,56 +7,57 @@
 
 @layer base {
   /**
-   * Tailwind CSS theme
+   * Tailwind CSS theme for Titanium Studio
    * tailwind.config.ts expects the following color variables to be expressed as HSL values.
    * A different format will require also updating the theme in tailwind.config.ts.
   */
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Soft UI & Glassmorphism Color Palette */
+    --background: 240 30% 97%;
+    --foreground: 222 50% 12%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 222 50% 12%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 222 50% 12%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 217 100% 58%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217 100% 58%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 215 19% 85%;
+    --muted-foreground: 215 14% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 217 100% 58%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 220 15% 90%;
+    --input: 0 0% 100%;
+    --ring: 217 100% 58%;
 
-    --radius: 0.5rem;
+    --radius: 1.5rem;
 
     --sidebar-background: 0 0% 98%;
 
-    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-foreground: 222 50% 12%;
 
-    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary: 217 100% 58%;
 
-    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-primary-foreground: 0 0% 100%;
 
-    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent: 217 100% 58%;
 
-    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-accent-foreground: 0 0% 100%;
 
-    --sidebar-border: 220 13% 91%;
+    --sidebar-border: 220 15% 90%;
 
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-ring: 217 100% 58%;
   }
 
   .dark {
@@ -103,8 +104,15 @@
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-background text-foreground;
+    background: linear-gradient(135deg, hsl(210, 60%, 95%) 0%, hsl(240, 30%, 97%) 100%);
+    min-height: 100vh;
+    font-family: "Inter", sans-serif;
   }
 
   :where(p, span, li, h1, h2, h3, h4, h5, h6, a, button, label, td, th) {
@@ -116,5 +124,71 @@
   code {
     overflow-x: auto;
     white-space: pre;
+  }
+}
+
+/* Titanium Studio Custom Styles */
+@layer components {
+  /* Glassmorphic Panel */
+  .glass-panel {
+    @apply rounded-3xl bg-white/80 backdrop-blur-2xl;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+  }
+
+  /* Glass Button */
+  .glass-button {
+    @apply rounded-full bg-blue-500 text-white font-medium transition-all duration-200;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .glass-button:hover {
+    @apply scale-105 shadow-lg;
+    box-shadow: 0 15px 50px rgba(59, 130, 246, 0.2);
+  }
+
+  .glass-button:active {
+    @apply scale-95;
+  }
+
+  /* Input Field */
+  .glass-input {
+    @apply rounded-full bg-white/50 backdrop-blur-xl border border-blue-200/30;
+    @apply px-4 py-2 text-foreground placeholder-gray-400;
+    @apply focus:outline-none focus:ring-2 focus:ring-blue-400 focus:bg-white;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.02);
+    transition: all 0.3s ease;
+  }
+
+  /* Generation Card */
+  .generation-card {
+    @apply glass-panel p-6 w-full;
+    animation: slideUpFade 0.6s ease-out;
+  }
+
+  /* Animations */
+  @keyframes slideUpFade {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .float-animation {
+    animation: float 3s ease-in-out infinite;
   }
 }
